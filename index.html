@@ -1,22 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Práctica web — Informática III</title>
+    <title>Alitach — Práctica web</title>
   </head>
-  <body class="bg-gray-100 text-gray-800">
+  <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between">
 
-    <!-- PARTE A: comprobación de Tailwind.
-         Si esta barra se ve azul con texto blanco, Tailwind está funcionando.
-         Bórrala cuando termines la Parte A. -->
-    <div class="bg-blue-600 text-white text-center p-4 font-semibold">
+    <!-- PARTE A: Comprobación de Tailwind -->
+    <div class="bg-blue-600 text-white text-center p-4 font-semibold shadow">
       ✅ Si ves esta barra azul, Tailwind está funcionando
     </div>
 
-    <!-- EJERCICIO 1: construye aquí tu página (header, main con #catalogo, footer).
-         Las instrucciones están en el README. -->
+    <!-- EJERCICIO 1: Header del negocio -->
+    <header class="bg-indigo-600 text-white p-6 text-center shadow-md">
+      <h1 class="text-3xl font-bold">Alitach</h1>
+      <p class="text-sm text-indigo-100 mt-1">Bordados y serigrafía personalizados</p>
+    </header>
 
+    <!-- Main con el contenedor id="catalogo" y rejilla responsiva -->
+    <main class="p-6 max-w-6xl mx-auto flex-grow w-full">
+      <div id="catalogo" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        
+        <!-- Tarjeta 1: Bordado -->
+        <div class="bg-white rounded-lg shadow p-4 flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <h3 class="text-lg font-bold text-gray-800">Bordado</h3>
+            <p class="text-indigo-600 font-semibold mt-2">$20 MXN</p>
+          </div>
+          <button class="mt-4 bg-indigo-500 text-white font-medium py-2 px-4 rounded hover:bg-indigo-600 transition">
+            Agregar
+          </button>
+        </div>
+
+        <!-- Tarjeta 2: Serigrafía -->
+        <div class="bg-white rounded-lg shadow p-4 flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <h3 class="text-lg font-bold text-gray-800">Serigrafía</h3>
+            <p class="text-indigo-600 font-semibold mt-2">$50 MXN</p>
+          </div>
+          <button class="mt-4 bg-indigo-500 text-white font-medium py-2 px-4 rounded hover:bg-indigo-600 transition">
+            Agregar
+          </button>
+        </div>
+
+        <!-- Tarjeta 3: Chaleco -->
+        <div class="bg-white rounded-lg shadow p-4 flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <h3 class="text-lg font-bold text-gray-800">Chaleco</h3>
+            <p class="text-indigo-600 font-semibold mt-2">$150 MXN</p>
+          </div>
+          <button class="mt-4 bg-indigo-500 text-white font-medium py-2 px-4 rounded hover:bg-indigo-600 transition">
+            Agregar
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Footer del negocio -->
+    <footer class="bg-gray-800 text-white text-center p-4 text-sm">
+      <p>&copy; 2026 Alitach. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Script principal para Vite y JavaScript -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
