@@ -5,11 +5,19 @@ const catalogo = document.getElementById('catalogo')
 const listaPedido = document.getElementById('lista-pedido')
 const textoTotal = document.getElementById('total')
 const btnVaciar = document.getElementById('btn-vaciar')
+const contenedorFiltros = document.getElementById('filtros-categoria')
 
 const pedido = []
+let categoriaActual = 'todos' // Controla el botón activo
+
 // 1. Mostrar productos en el catálogo
 function mostrarProductos(lista) {
   if (!catalogo) return;
+
+  if (lista.length === 0) {
+    catalogo.innerHTML = `<p class="col-span-full text-center text-gray-400 py-8">No hay productos en esta categoría</p>`;
+    return;
+  }
 
   catalogo.innerHTML = lista.map(p => `
     <div class="bg-white rounded-lg shadow p-4 flex flex-col justify-between hover:shadow-lg transition border border-gray-100">
@@ -25,7 +33,29 @@ function mostrarProductos(lista) {
   `).join('');
 }
 
-// 2. Mostrar el pedido actual en el <aside>
+// 2. Renderizar botones de filtro dinámicamente con las categorías de los datos
+function mostrarFiltros() {
+  if (!contenedorFiltros) return;
+
+  // Extraer categorías únicas de los productos
+  const categoriasUnicas = ['todos', ...new Set(productos.map(p => p.categoria))];
+
+  contenedorFiltros.innerHTML = categoriasUnicas.map(cat => {
+    const activo = categoriaActual === cat;
+    // Clases condicionales de Tailwind para el botón activo y los inactivos
+    const clasesActivas = activo 
+      ? 'bg-indigo-600 text-white shadow' 
+      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200';
+
+    return `
+      <button data-categoria="${cat}" class="px-4 py-2 rounded-lg font-medium text-sm transition capitalize ${clasesActivas}">
+        ${cat}
+      </button>
+    `;
+  }).join('');
+}
+
+// 3. Mostrar el pedido actual en el <aside>
 function mostrarPedido() {
   if (!listaPedido || !textoTotal) return;
 
@@ -35,7 +65,6 @@ function mostrarPedido() {
     return;
   }
 
-  // Dibujar cada producto del pedido usando map
   listaPedido.innerHTML = pedido.map(p => `
     <li class="flex justify-between items-center bg-gray-50 p-2 rounded">
       <span>${p.nombre}</span>
@@ -43,12 +72,11 @@ function mostrarPedido() {
     </li>
   `).join('');
 
-  // Calcular el total con reduce
   const total = pedido.reduce((suma, p) => suma + p.precio, 0);
   textoTotal.textContent = `$${total} MXN`;
 }
 
-// 3. Escuchar clics en el contenedor del catálogo para agregar productos
+// 4. Escuchar clics en el catálogo (para agregar productos)
 if (catalogo) {
   catalogo.addEventListener('click', (evento) => {
     const boton = evento.target.closest('button[data-id]');
@@ -64,37 +92,32 @@ if (catalogo) {
   });
 }
 
+// 5. Escuchar clics en los botones de filtro de categoría
+if (contenedorFiltros) {
+  contenedorFiltros.addEventListener('click', (evento) => {
+    const boton = evento.target.closest('button[data-categoria]');
+    if (!boton) return;
+
+    categoriaActual = boton.dataset.categoria;
+
+    // Filtrar la lista o mostrar todos
+    const listaFiltrada = categoriaActual === 'todos' 
+      ? productos 
+      : productos.filter(p => p.categoria === categoriaActual);
+
+    mostrarFiltros();       // Actualiza los estilos visuales de los botones
+    mostrarProductos(listaFiltrada); // Pinta las tarjetas filtradas
+  });
+}
+
+// 6. Vaciar el pedido
 if (btnVaciar) {
   btnVaciar.addEventListener('click', () => {
-    pedido.length = 0; 
+    pedido.length = 0;
     mostrarPedido();
   });
 }
 
-
+// Inicialización al cargar la página
+mostrarFiltros();
 mostrarProductos(productos);
-
-
-mostrarProductos(productos);
-
-mostrarProductos(productos)
-
-
-// El pedido es un arreglo con los productos que la persona va agregando.
-// Pasos (detalle en el README):
-//   1. Escucha el clic en el contenedor #catalogo (delegación de eventos).
-//   2. Busca el producto por id con .find() y agrégalo con .push().
-//   3. Dibuja el pedido con mostrarPedido() y calcula el total con .reduce().
-//   4. Botón "Vaciar pedido".
-// ------------------------------------------------------------
-const pedido = []
-
-// Escribe aquí tu código del Ejercicio 3
-
-// ------------------------------------------------------------
-// EJERCICIO 4 — Filtrar por categoría
-// Botones de categoría que llamen a mostrarProductos() con
-// productos.filter(...). El botón "Todos" muestra la lista completa.
-// ------------------------------------------------------------
-
-// Escribe aquí tu código del Ejercicio 4

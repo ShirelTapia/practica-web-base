@@ -1,59 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alitach — Práctica web</title>
-  </head>
-  <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between">
-
-    <!-- PARTE A: Comprobación de Tailwind -->
-    <div class="bg-blue-600 text-white text-center p-4 font-semibold shadow">
-      ✅ Si ves esta barra azul, Tailwind está funcionando
+<!-- Contenido principal y Carrito -->
+<main class="p-6 max-w-7xl mx-auto flex-grow w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
+  
+  <!-- Catálogo y Filtros (Ocupa 2 columnas en pantallas grandes) -->
+  <section class="lg:col-span-2">
+    
+    <!-- EJERCICIO 4: Contenedor para los botones de categoría -->
+    <div id="filtros-categoria" class="flex flex-wrap gap-2 mb-6">
+      <!-- Los botones se generan dinámicamente desde JavaScript -->
     </div>
 
-    <!-- EJERCICIO 1: Header del negocio -->
-    <header class="bg-indigo-600 text-white p-6 text-center shadow-md">
-      <h1 class="text-3xl font-bold">Alitach</h1>
-      <p class="text-sm text-indigo-100 mt-1">Bordados y serigrafía personalizados</p>
-    </header>
+    <!-- Catálogo de productos -->
+    <div id="catalogo" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- Las tarjetas se generan dinámicamente con JavaScript -->
+    </div>
+  </section>
 
-    <!-- Contenido principal y Carrito (Layout flex para que se acomoden) -->
-    <main class="p-6 max-w-7xl mx-auto flex-grow w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- Catálogo (Ocupa 2 columnas en pantallas grandes) -->
-      <section class="lg:col-span-2">
-        <div id="catalogo" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- Las tarjetas se generan dinámicamente con JavaScript -->
-        </div>
-      </section>
+  <!-- Aside de Mi Pedido -->
+  <aside class="bg-white rounded-lg shadow p-6 h-fit border border-gray-100">
+    <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Mi pedido</h2>
+    
+    <ul id="lista-pedido" class="space-y-2 mb-4 text-sm text-gray-600">
+      <p class="text-gray-400 italic">No hay productos agregados</p>
+    </ul>
 
-      <!-- EJERCICIO 3: Aside de Mi Pedido -->
-      <aside class="bg-white rounded-lg shadow p-6 h-fit border border-gray-100">
-        <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Mi pedido</h2>
-        
-        <ul id="lista-pedido" class="space-y-2 mb-4 text-sm text-gray-600">
-          <p class="text-gray-400 italic">No hay productos agregados</p>
-        </ul>
+    <div class="border-t pt-4 flex justify-between items-center mb-4">
+      <span class="font-bold text-gray-700">Total:</span>
+      <p id="total" class="text-lg font-bold text-indigo-600">$0 MXN</p>
+    </div>
 
-        <div class="border-t pt-4 flex justify-between items-center mb-4">
-          <span class="font-bold text-gray-700">Total:</span>
-          <p id="total" class="text-lg font-bold text-indigo-600">$0 MXN</p>
-        </div>
-
-        <button id="btn-vaciar" class="w-full bg-red-500 text-white font-medium py-2 px-4 rounded hover:bg-red-600 transition">
-          Vaciar pedido
-        </button>
-      </aside>
-
-    </main>
-
-    <!-- Footer del negocio -->
-    <footer class="bg-gray-800 text-white text-center p-4 text-sm">
-      <p>&copy; 2026 Alitach. Todos los derechos reservados.</p>
-    </footer>
-
-    <!-- Script principal para Vite y JavaScript -->
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html>
+    <button id="btn-vaciar" class="w-full bg-red-500 text-white font-medium py-2 px-4 rounded hover:bg-red-600 transition">
+      Vaciar pedido
+    </button>
+  </aside>
+</main>
