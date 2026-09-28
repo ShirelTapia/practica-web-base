@@ -1,35 +1,108 @@
-<!-- Contenido principal y Carrito -->
-<main class="p-6 max-w-7xl mx-auto flex-grow w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
-  
-  <!-- Catálogo y Filtros (Ocupa 2 columnas en pantallas grandes) -->
-  <section class="lg:col-span-2">
-    
-    <!-- EJERCICIO 4: Contenedor para los botones de categoría -->
-    <div id="filtros-categoria" class="flex flex-wrap gap-2 mb-6">
-      <!-- Los botones se generan dinámicamente desde JavaScript -->
-    </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Negocio - Práctica 4</title>
+</head>
+<body class="bg-pink-50 min-h-screen text-gray-800 p-4 md:p-8 max-w-7xl mx-auto space-y-8">
 
-    <!-- Catálogo de productos -->
-    <div id="catalogo" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <!-- Las tarjetas se generan dinámicamente con JavaScript -->
+  <!-- Encabezado -->
+  <header class="text-center py-4 border-b border-pink-200">
+    <h1 class="text-3xl font-extrabold text-pink-700">Alitach</h1>
+    <p class="text-sm text-pink-600 mt-1">Confección y Personalización de Uniformes</p>
+  </header>
+
+  <!-- Contenedor Principal (Catálogo + Carrito) -->
+  <main class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+    
+    <!-- Sección Izquierda: Catálogo y Filtros (2 columnas en pantallas grandes) -->
+    <section class="lg:col-span-2 space-y-6">
+      
+      <!-- Contenedor para Filtros de Categoría -->
+      <div>
+        <h2 class="text-lg font-bold text-gray-700 mb-3">Categorías</h2>
+        <div id="filtros-categoria" class="flex flex-wrap gap-2">
+          <!-- Creado dinámicamente desde main.js -->
+        </div>
+      </div>
+
+      <!-- Contenedor del Catálogo de Productos -->
+      <div>
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Catálogo de Productos</h2>
+        <div id="catalogo" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Creado dinámicamente desde main.js -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Sección Derecha: Barra Lateral de Pedido y Formulario de Cliente -->
+    <aside class="bg-white rounded-2xl shadow-md p-6 h-fit border border-pink-100">
+      <h2 class="text-xl font-bold text-pink-700 mb-4 border-b border-pink-100 pb-2">Mi pedido</h2>
+      
+      <ul id="lista-pedido" class="space-y-2 mb-4 text-sm text-gray-600">
+        <p class="text-gray-400 italic">No hay productos agregados</p>
+      </ul>
+
+      <!-- Total y Botón Vaciar -->
+      <div class="border-t border-pink-100 pt-4 mt-4">
+        <div class="flex justify-between items-center mb-4">
+          <span class="font-bold text-gray-700">Total:</span>
+          <span id="total" class="font-bold text-pink-600 text-lg">$0 MXN</span>
+        </div>
+        <button id="btn-vaciar" class="w-full bg-rose-50 text-rose-600 font-medium py-2 px-4 rounded-xl hover:bg-rose-100 transition border border-rose-200">
+          Vaciar pedido
+        </button>
+      </div>
+
+      <!-- Formulario Datos del Cliente con estilos Rosas -->
+      <form id="form-cliente" class="mt-6 border-t border-pink-100 pt-4 space-y-3">
+        <h3 class="font-semibold text-pink-800 text-sm">Datos del cliente</h3>
+
+        <!-- Campo Nombre -->
+        <div>
+          <label for="nombre" class="block text-xs font-medium text-gray-700 mb-1">Nombre completo</label>
+          <input type="text" id="nombre" class="w-full border border-pink-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 transition bg-pink-50/30">
+          <p id="error-nombre" class="text-xs text-rose-600 hidden mt-1 font-medium"></p>
+        </div>
+
+        <!-- Campo Teléfono -->
+        <div>
+          <label for="telefono" class="block text-xs font-medium text-gray-700 mb-1">Teléfono (10 dígitos)</label>
+          <input type="text" id="telefono" class="w-full border border-pink-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 transition bg-pink-50/30">
+          <p id="error-telefono" class="text-xs text-rose-600 hidden mt-1 font-medium"></p>
+        </div>
+
+        <!-- Campo Correo -->
+        <div>
+          <label for="correo" class="block text-xs font-medium text-gray-700 mb-1">Correo electrónico</label>
+          <input type="text" id="correo" class="w-full border border-pink-200 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 transition bg-pink-50/30">
+          <p id="error-correo" class="text-xs text-rose-600 hidden mt-1 font-medium"></p>
+        </div>
+
+        <!-- Error general para pedido vacío -->
+        <p id="error-pedido" class="text-xs text-rose-600 hidden mt-1 font-semibold"></p>
+
+        <button type="submit" class="w-full bg-pink-500 text-white font-medium py-2.5 px-4 rounded-xl hover:bg-pink-600 shadow-sm hover:shadow transition">
+          Confirmar pedido
+        </button>
+      </form>
+    </aside>
+
+  </main>
+
+  <!-- Sección de Pedidos Registrados con estado (Ejercicio 6) -->
+  <section class="mt-10 p-6 bg-white/80 rounded-2xl border border-pink-100 shadow-sm backdrop-blur-sm">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+      Pedidos registrados
+    </h2>
+    
+    <div id="pedidos-registrados" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Creado dinámicamente desde main.js -->
     </div>
   </section>
 
-  <!-- Aside de Mi Pedido -->
-  <aside class="bg-white rounded-lg shadow p-6 h-fit border border-gray-100">
-    <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Mi pedido</h2>
-    
-    <ul id="lista-pedido" class="space-y-2 mb-4 text-sm text-gray-600">
-      <p class="text-gray-400 italic">No hay productos agregados</p>
-    </ul>
-
-    <div class="border-t pt-4 flex justify-between items-center mb-4">
-      <span class="font-bold text-gray-700">Total:</span>
-      <p id="total" class="text-lg font-bold text-indigo-600">$0 MXN</p>
-    </div>
-
-    <button id="btn-vaciar" class="w-full bg-red-500 text-white font-medium py-2 px-4 rounded hover:bg-red-600 transition">
-      Vaciar pedido
-    </button>
-  </aside>
-</main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
